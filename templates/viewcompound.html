@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Main {% endblock %} <!-- Title goes here -->
+{% block head %} {{ super() }} {% endblock %}
+
+{% block content %}
+	
+	<br>
+	<div class="container-fluid pr-5">
+		<p> {{compName}} </p>
+		<iframe style="width: 500px; height: 300px;" frameborder="0" src="https://embed.molview.org/v1/?mode=balls&cid={{compId}}"></iframe>
+	</div>
+	
+{% endblock %}
+		
+
+
+
