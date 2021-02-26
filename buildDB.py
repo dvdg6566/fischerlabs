@@ -1,8 +1,9 @@
-import urllib.request
-from time import time
-import json
-from mol2 import proc
 import os
+import json
+import urllib.request
+import awstools
+from decimal import *
+from assets.physicalProperties import proc
 
 def getJson(url):
 	data = urllib.request.urlopen(url).read()
@@ -16,7 +17,12 @@ def getInfo(compound):
 	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/synonyms/json'	
 	SYN_json = getJson(url)['InformationList']['Information'][0]
 	CID = SYN_json['CID'] # CID
-	SYN = SYN_json['Synonym'] # Synonyms
+	SYN = SYN_json['Synonym'][:100] # Synonyms
+
+	# for i in SYN:
+	# 	item = {'searchKey':i,'compoundName':compound}
+	# 	awstools.writeToDB('compoundSearch', item)
+
 	print('Synonyms ',SYN[:5])
 	print('Compound ID: ',CID)
 	# Update lookup DB with syn
@@ -34,7 +40,6 @@ def getInfo(compound):
 	print("Molecular Formula: ",molFormula)
 	print("Molecular Weight: ",molWeight)
 	print("IUPAC ",molIUPAC)
-	# print(molFormula,molWeight,molIUPAC)
 
 	HSDBindex = -1 # Hazardous substances index
 	for i in SYN:
@@ -43,17 +48,33 @@ def getInfo(compound):
 			HSDBindex = x
 	print("HSDB Index: ",HSDBindex)
 
-	if not os.path.isfile(f"{compound}.json"):
+	if not os.path.isfile(f"assets/{compound}.json"):
 		allInfoURL = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON/'
 		alljson = getJson(allInfoURL)
-		f = open(f"{compound}.json","w")
+		f = open(f"assets/{compound}.json","w")
 		f.write(json.dumps(alljson))
 		f.close()
-	proc(compound)
+	physicalProperties = proc(compound)
 
-getInfo('chlorobenzene')
-getInfo('ethyne')
-getInfo('benzene')
-getInfo('methane')
-getInfo('ethanol')
-getInfo('bromobenzene')
+	molWeight = Decimal(molWeight)
+	molWeight = round(molWeight,2)
+
+	item = {
+		'compoundName':compound,
+		'CID': CID,
+		'MolecularFormula':molFormula,
+		'MolecularWeight':molWeight,
+		'IUPACName':molIUPAC,
+		'HSDBindex':HSDBindex,
+		'physicalProperties':physicalProperties
+	}
+
+	awstools.writeToDB('compoundInformation', item)
+
+if __name__ == '__main__':
+	# getInfo('chlorobenzene')
+	# getInfo('ethyne')
+	# getInfo('benzene')
+	# getInfo('methane')
+	# getInfo('ethanol')
+	# getInfo('bromobenzene')

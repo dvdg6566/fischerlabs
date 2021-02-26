@@ -19,7 +19,7 @@ def scan(physical, title):
 			return res
 
 def proc(compound):
-	with open(f'{compound}.json','r') as file:
+	with open(f'assets/{compound}.json','r') as file:
 		data = json.load(file)
 
 	data = data['Record']['Section']

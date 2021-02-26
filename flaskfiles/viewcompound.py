@@ -1,7 +1,7 @@
 from flask import render_template, redirect
-import databasetools
+import awstools
 
 def viewcompound(compName):
-	compId = databasetools.getCompoundCID(compName)
+	compId = awstools.getCompoundCID(compName)
 
 	return render_template('viewcompound.html',compName=compName,compId=compId)
