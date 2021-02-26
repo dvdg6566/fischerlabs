@@ -17,9 +17,9 @@ def getInfo(compound):
 	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/synonyms/json'	
 	SYN_json = getJson(url)['InformationList']['Information'][0]
 	CID = SYN_json['CID'] # CID
-	SYN = SYN_json['Synonym'][:100] # Synonyms
+	SYN = SYN_json['Synonym'] # Synonyms
 
-	# for i in SYN:
+	# for i in SYN[:100]:
 	# 	item = {'searchKey':i,'compoundName':compound}
 	# 	awstools.writeToDB('compoundSearch', item)
 
@@ -28,8 +28,8 @@ def getInfo(compound):
 	# Update lookup DB with syn
 	# Update DB with CID
 
-	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/PNG'
-	data = urllib.request.urlretrieve(url,'test.png')
+	# url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/PNG'
+	# data = urllib.request.urlretrieve(url,'test.png')
 	# Upload to S3
 
 	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/property/MolecularFormula,MolecularWeight,IUPACname/json'
@@ -76,5 +76,5 @@ if __name__ == '__main__':
 	# getInfo('ethyne')
 	# getInfo('benzene')
 	# getInfo('methane')
-	# getInfo('ethanol')
+	getInfo('ethanol')
 	# getInfo('bromobenzene')
