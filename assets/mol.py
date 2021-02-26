@@ -2,6 +2,7 @@ import urllib.request
 from time import time
 import json
 from mol2 import proc
+import os
 
 def getJson(url):
 	data = urllib.request.urlopen(url).read()
@@ -42,15 +43,16 @@ def getInfo(compound):
 			HSDBindex = x
 	print("HSDB Index: ",HSDBindex)
 
-	# allInfoURL = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON/'
-	# alljson = getJson(allInfoURL)
-	# f = open(f"{compound}.json","w")
-	# f.write(json.dumps(alljson))
-	# f.close()
+	if not os.path.isfile(f"{compound}.json"):
+		allInfoURL = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON/'
+		alljson = getJson(allInfoURL)
+		f = open(f"{compound}.json","w")
+		f.write(json.dumps(alljson))
+		f.close()
 	proc(compound)
 
-
-getInfo('ethyne')
+getInfo('chlorobenzene')
+# getInfo('ethyne')
 # getInfo('benzene')
 # getInfo('methane')
 # getInfo('ethanol')
