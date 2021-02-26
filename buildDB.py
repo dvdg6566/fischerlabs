@@ -1,27 +1,40 @@
 import os
 import json
+import random
 import urllib.request
 import awstools
 from decimal import *
 from assets.physicalProperties import proc
+import urllib
 
 def getJson(url):
-	data = urllib.request.urlopen(url).read()
+	url=urllib.parse.quote(url,safe=':/')
+	data = urllib.request.urlopen(url)
+	data = data.read()
 	return json.loads(data)
 
 def getInfo(compound):	
+	compound = compound.lower()
 	print(f"Compound name: {compound}")
 	
 	# GET SYNONYMS
+
+	url=f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/property/InChI/json'
+	CID_json = getJson(url)
+	CID = CID_json['PropertyTable']['Properties'][0]['CID']
+	print(CID)
+
 	synonyms = []
 	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/synonyms/json'	
 	SYN_json = getJson(url)['InformationList']['Information'][0]
 	CID = SYN_json['CID'] # CID
 	SYN = SYN_json['Synonym'] # Synonyms
+	item = {'searchKey':compound,'compoundName':compound}
+	awstools.writeToDB('compoundName',item)
 
-	# for i in SYN[:100]:
-	# 	item = {'searchKey':i,'compoundName':compound}
-	# 	awstools.writeToDB('compoundSearch', item)
+	for i in SYN[:100]:
+		item = {'searchKey':i,'compoundName':compound}
+		awstools.writeToDB('compoundSearch', item)
 
 	print('Synonyms ',SYN[:5])
 	print('Compound ID: ',CID)
@@ -62,11 +75,12 @@ def getInfo(compound):
 	item = {
 		'compoundName':compound,
 		'CID': CID,
-		'MolecularFormula':molFormula,
-		'MolecularWeight':molWeight,
+		'molecularFormula':molFormula,
+		'molecularWeight':molWeight,
 		'IUPACName':molIUPAC,
 		'HSDBindex':HSDBindex,
-		'physicalProperties':physicalProperties
+		'physicalProperties':physicalProperties,
+		'quantity':random.randint(1,1000)
 	}
 
 	awstools.writeToDB('compoundInformation', item)
@@ -76,5 +90,8 @@ if __name__ == '__main__':
 	# getInfo('ethyne')
 	# getInfo('benzene')
 	# getInfo('methane')
-	getInfo('ethanol')
+	# getInfo('ethanol')
 	# getInfo('bromobenzene')
+	# getInfo('sodium chloride')
+	# getInfo('sodium hydroxide')
+	# getInfo('potassium hydroxide')

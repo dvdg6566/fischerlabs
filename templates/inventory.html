@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %} Inventory {% endblock %} <!-- Title goes here -->
+{% block head %} {{ super() }} {% endblock %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}
+
+<br>
+
+<div class="container">
+	<div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                            {% for category, message in messages %}
+                                    <div class="alert alert-{{category}} alert-dismissible fade show mt-4" role="alert">
+                                            {{message}}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                            {% endfor %}
+                    {% endif %}
+            {% endwith %}
+    </div>
+
+	<form action="" method="post" class="form-group" id="addproblemform">
+		<div class="input-group mb-3">
+			{{form.compound(type='text', placeholder='Compound Name', class='form-control', pattern="[a-zA-Z0-9_]+")}}
+			{{form.submit(type='submit', class='btn btn-secondary')}}
+		</div>
+	</form>
+
+	<table class="table table-hover" id="myTable">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Compound Name</th>
+				<th scope="col">Molecular Formula</th>
+				<th scope="col">Quantity in stock</th>
+			</tr>
+			</thead>
+			
+			<tbody>
+
+			{% for compound in compoundInfo %}
+				<tr>
+				<td scope="row">
+					<b> <a href="{{url_for('viewcompound', compName=compound.compoundName)}}" class="pl-2">{{compound.compoundName}}</a> </b>
+				</td>
+					<td>{{compound.molecularFormula}}</td>
+					<td>{{compound.quantity}}kg</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
+
+
+
+

@@ -15,7 +15,11 @@ def scan(physical, title):
 	for i in physical:
 		th = i['TOCHeading']
 		if th == title:
-			res = i['Information'][0]['Value']['StringWithMarkup'][0]['String']
+			res = i['Information'][0]['Value']
+			try:
+				res = res['StringWithMarkup'][0]['String']
+			except KeyError:	
+				res = res['Number'][0]
 			return res
 
 def proc(compound):
@@ -41,11 +45,12 @@ def proc(compound):
 	print()
 	return physicalProperties
 
-# proc('ethyne')
-# proc('benzene')
-# proc('methane')
-# proc('ethanol')
-# proc('bromobenzene')
+if __name__ == '__main__':
+	# proc('ethyne')
+	# proc('benzene')
+	# proc('methane')
+	# proc('ethanol')
+	proc('Potassium Hydroxide')
 
 
 # print(dat)
