@@ -4,6 +4,7 @@ import awstools
 
 def inventory():
 	form = SearchCompoundForm()
+	userinfo = awstools.getCurrentUserInfo()
 
 	if form.is_submitted():
 		print("Hello")
@@ -17,5 +18,5 @@ def inventory():
 			PUBCompound.lower()
 			return redirect(f'/compound/{PUBCompound}')
 
-	return render_template('inventory.html',compoundInfo=awstools.getInventory(),form=form)
+	return render_template('inventory.html',compoundInfo=awstools.getInventory(),form=form,userinfo=userinfo)
 

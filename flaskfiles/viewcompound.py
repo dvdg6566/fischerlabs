@@ -3,5 +3,6 @@ import awstools
 
 def viewcompound(compName):
 	compId = awstools.getCompoundCID(compName)
+	userinfo = awstools.getCurrentUserInfo()
 
-	return render_template('viewcompound.html',compName=compName,compId=compId)
+	return render_template('viewcompound.html',compName=compName,compId=compId,userinfo=userinfo)

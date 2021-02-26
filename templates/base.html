@@ -45,11 +45,24 @@
 
 			<ul class="nav navbar-nav ml-auto mr-3">
 				<li>
-					<a class="nav-link" href="/login"> Cart </a>
+					<a class="nav-link" href="/cart"> Cart </a>
 				</li>
+				{% if userinfo.username == None %}
 				<li>
-					<a class="nav-link" href="/profile"> Profile </a>
+					<a class="nav-link" href="/login"> Login </a>
 				</li>
+				{% else %}	
+				<ul class="nav navbar-nav ml-auto mr-3">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{{userinfo.username}} ({{userinfo.role}})
+						</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/profile/{{userinfo.username}}"> Profile </a>
+						<a class="dropdown-item" href="/logout"> Logout </a>
+					</div>
+				</ul>
+				{% endif %}
 			</ul>
 		</nav>
 		{% block content %}{% endblock %}
