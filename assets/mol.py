@@ -52,8 +52,8 @@ def getInfo(compound):
 	proc(compound)
 
 getInfo('chlorobenzene')
-# getInfo('ethyne')
-# getInfo('benzene')
-# getInfo('methane')
-# getInfo('ethanol')
-# getInfo('bromobenzene')
+getInfo('ethyne')
+getInfo('benzene')
+getInfo('methane')
+getInfo('ethanol')
+getInfo('bromobenzene')
