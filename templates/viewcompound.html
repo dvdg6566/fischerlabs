@@ -51,7 +51,7 @@
   							<button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" id="decrease"><i class="fa fa-minus" aria-hidden="true"></i>
 							</button>
 						</div>
-						<input class="input-group-field" type="number" name="quantity" value=0>
+						<input class="input-group-field" type="number" name="quantity" value={{current}}>
 						<div class="input-group-button">
 							<button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
 							</button>
@@ -115,7 +115,7 @@
 					</div>
 				</th>
 				<th style="width: 10%;">
-					<a class="addtocart" style="overflow: auto;"> <button id="addtocart" onclick='addtocart()'>Add to Cart</button></a>
+					<a class="addtocart" style="overflow: auto;"> <button id="addtocart" onclick='addtocart()'>Update Quantity</button></a>
 				</th>
 			</tr>
 		</table>

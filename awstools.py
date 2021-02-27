@@ -139,7 +139,7 @@ def addItem(comp,currentVal,requestId):
 	done = 0
 	for i in x['items']:
 		if i['compoundName'] == comp:
-			i['quantity']+=currentVal
+			i['quantity']=currentVal
 			done = 1
 	if not done:
 		x['items'].append({'compoundName':comp,'quantity':currentVal,'status':'-'})

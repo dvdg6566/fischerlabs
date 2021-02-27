@@ -14,6 +14,10 @@ def order(orderID):
         return redirect('/')
     print(orderinfo['items'])
 
+    cost=0
+    for i in orderinfo['items']:
+        cost+=5*i['quantity']
+
     if form.is_submitted():
         result = request.form
         files = request.files
@@ -58,5 +62,4 @@ def order(orderID):
                 flash('Invalid file format', 'warning')
                 return redirect(f'/order/{orderID}')
 
-
-    return render_template('order.html',userinfo=userinfo,orderinfo=orderinfo,items=orderinfo['items'],form=form)
+    return render_template('order.html',userinfo=userinfo,orderinfo=orderinfo,items=orderinfo['items'],form=form,cost=cost)
