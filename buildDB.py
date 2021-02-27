@@ -3,6 +3,7 @@ import json
 import random
 import urllib.request
 import awstools
+import pandas as pd
 from decimal import *
 from assets.physicalProperties import proc
 import urllib
@@ -118,12 +119,17 @@ def getInfo(compound):
 	awstools.writeToDB('compoundInformation', item)
 
 if __name__ == '__main__':
-	getInfo('chlorobenzene')
-	getInfo('ethyne')
-	getInfo('benzene')
-	getInfo('ethane')
-	getInfo('ethanol')
-	getInfo('bromobenzene')
-	getInfo('sodium chloride')
-	getInfo('sodium hydroxide')
-	getInfo('potassium hydroxide')
+	# table = pd.read_csv('assets/chem_database_v1.csv')
+	# print(table.shape)
+
+	getInfo('1,2,5,6,9,10-Hexabromocyclododecane')
+	# getInfo('chlorobenzene')
+	# getInfo('ethyne')
+	# getInfo('benzene')
+	# getInfo('ethane')
+	# getInfo('ethanol')
+	# getInfo('bromobenzene')
+	# getInfo('sodium chloride')
+	# getInfo('sodium hydroxide')
+	# getInfo('potassium hydroxide')
+	

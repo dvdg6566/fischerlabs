@@ -1,0 +1,146 @@
+Chemical Name,CID,Functional Group
+Methanoic acid,284,Acid
+Ethanoic acid,176,Acid
+Sulfuric acid,1118,Acid
+Benzoic acid,243,Acid
+Hydrochloric acid,313,Acid
+Adipic acid,196,Acid
+Nitric acid,944,Acid
+Phosphoric acid,1004,Acid
+Hypochlorous acid,24341,Acid
+Alginic acid,6850754,Acid
+Periodic acid,65185,Acid
+Hydroiodic acid,24841,Acid
+Hydrofluoric acid,14917,Acid
+Hydrobromic acid,260,Acid
+Methanol,887,Alcohol
+Ethanol,702,Alcohol
+Propanol,1031,Alcohol
+Phenol,996,Alcohol
+acetaldehyde,177,Aldehyde
+benzaldehyde,240,Aldehyde
+Methane,297,Alkane
+Ethane,6324,Alkane
+Propane,6334,Alkane
+Hexane,8058,Alkane
+Octane,356,Alkane
+Decane,15600,Alkane
+Benzene,241,Arene
+Toluene,1140,Arene
+Cumene,7406,Arene
+Styrene,7501,Arene
+Xylene,6850715,Arene
+Ethylbenzene,7500,Arene
+Napthalene,931,Arene
+Anthracene,8418,Arene
+Durene,7269,Arene
+Biphenyl,7095,Arene
+Mesitylene,7947,Arene
+nitrobenzene,7416,Arene
+Kekulene,5460755,Arene
+Ammonia,222,Base
+Sodium Hydroxide,14798,Base
+DBU,,Base
+DBN,,Base
+Potassium Hydroxide,14797,Base
+Sodium Hydride,24758,Base
+Butyl Lithium,61028,Base
+Sodium Chloride,5234,Chloride
+Copper(II) Chloride,24014,Chloride
+Barium Chloride,25204,Chloride
+Potassium Chloride,4873,Chloride
+Silver Chloride,24561,Chloride
+EDTA,6049,Complex Ligand
+Cyclohexane,8078,Cycloalkane
+Cyclopentane,9253,Cycloalkane
+Hydrogen ,783,Element
+Nitrogen,947,Element
+Oxygen,977,Element
+Sodium,5360545,Element
+Graphite,5462310,Element
+silicon,5461123,Element
+helium,23987,Element
+argon,23968,Element
+neon,23935,Element
+krypton,5416,Element
+Sodium Fluoride,5235,Fluoride
+ethyl magnesium bromide,101914,Grignard reagent
+Fluorine,24524,Halogen
+Chlorine,24526,Halogen
+Bromine,24408,Halogen
+Iodine,807,Halogen
+boron nitride,66227,Inorganic reagent
+silica,24261,Inorganic reagent
+Sodium Silicate,23266,Inorganic reagent
+Osmium Tetroxide,30318,Inorganic reagent
+Lindlar's catalyst,131709914,Inorganic reagent
+Hydrazine,9321,Inorganic reagents
+Chlordane,5993,Insecticide
+Chlordecone,299,Insecticide
+endosulfan,3224,Insecticide
+Potassium Iodide,4875,Iodide
+benzophenone,3102,Ketone
+Francium,6328145,Metal
+Rubidium,5357696,Metal
+Bismuth,5359367,Metal
+Lead,5352425,Metal
+Mercury,23931,Metal
+Silver,23954,Metal
+Gold,23985,Metal
+Copper ,23978,Metal
+Bronze,15920287,Metal
+Nickel,935,Metal
+potassium,5462222,Metal
+Lithium ,3028194,Metal
+Tungsten,23964,Metal
+Zinc ,23994,Metal
+Silver Nitrate,24470,Nitrate
+Ammonium Nitrate,22985,Nitrate
+Barium Nitrate,24798,Nitrate
+Sodium Nitrate,24268,Nitrate
+Barium Oxide,62392,Oxide
+Zinc Oxide,14806,Oxide
+phosphoric oxide,14812,Oxide
+nitrous oxide,948,Oxide
+Titanium Dioxide,26042,Oxide
+Potassium Permanganate,516875,Oxidising agent
+MCPBA,70297,Oxidising agent
+Ozone,24823,Oxidising agent
+PCC,62529,Oxidising agent
+Hydrogen Peroxide,784,Peroxide
+Caffeine,2519,Pharmaceutical
+Aspartame,134601,Pharmaceutical
+Sodium Periodate,23667635,Reagent
+DDT,3036,Reagent
+DEAD,5462977,Reagent
+AIBN,6547,Reagent
+BINAP,634876,Reagent
+DDQ,6775,Reagent
+Dimethyl sulfide,1068,Reagent
+DMSO,679,Reagent
+Pyridiniumdichromate,2724130,Reagent
+Lithium diisopropyl amide,2724682,Reagent
+LHMDS,2733832,Reagent
+methoxymethyl,140104,Reagent
+Phosphine,24404,Reagent
+Buckminsterfullerene,123591,Reagent
+triphenylphosphine,11776,Reagent
+bengal rose,25473,Reagent
+NBS,67184,Reagent
+Antipyrine,2206,Reagent
+Vinyl Chloride,6338,Reagent
+Ethylene Glycol,174,Reagent
+Sodium Thiosulfate,24477,Reducing agent
+LAH,21226445,Reducing agent
+sodium borohydride,4311764,Reducing agent
+Sodium Hypochlorite,23665760,Salt
+Lithium Stearate,517357,Soap
+Sodium Laureth Sulfate,23665884,Soap
+Zeolite,9942228,Soap
+HMPA,12679,Solvent
+diethylether,3283,Solvent
+Water,962,Solvent
+acetone,180,Solvent
+Decalin,7044,Solvent
+Glucose,5793,Sugar
+Barium Sulfate,24414,Sulfate

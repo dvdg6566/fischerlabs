@@ -1,5 +1,5 @@
 import boto3
-import pubchempy as pcp
+from uuid import uuid4
 from pprint import pprint
 from flask import session
 from boto3.dynamodb.conditions import Key, Attr
@@ -73,7 +73,7 @@ def createUser(username,password):
 		return False
 	else:
 		hashed = generate_password_hash(password)
-		item = {'username':username,'password':hashed}
+		item = {'username':username,'password':hashed,'orders':[],'role':'buyer','currentOrder':uuid4()}
 		userInfoTable.put_item(Item=item)
 		return True
 
