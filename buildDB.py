@@ -8,7 +8,9 @@ from assets.physicalProperties import proc
 import urllib
 
 def getJson(url):
-	url=urllib.parse.quote(url,safe=':/')
+	# print(url)
+	url=urllib.parse.quote(url,safe=':/?=')
+	# print(url)
 	data = urllib.request.urlopen(url)
 	data = data.read()
 	return json.loads(data)
@@ -41,10 +43,6 @@ def getInfo(compound):
 	# Update lookup DB with syn
 	# Update DB with CID
 
-	# url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{compound}/PNG'
-	# data = urllib.request.urlretrieve(url,'test.png')
-	# Upload to S3
-
 	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/property/MolecularFormula,MolecularWeight,IUPACname/json'
 	molInfo_json = getJson(url)['PropertyTable']['Properties'][0]
 	molFormula = molInfo_json['MolecularFormula']
@@ -72,6 +70,19 @@ def getInfo(compound):
 	molWeight = Decimal(molWeight)
 	molWeight = round(molWeight,2)
 
+	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Industry Uses/'
+	industryJSON = getJson(url)
+	item = industryJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
+	industry = [i['String'] for i in item]
+	print(industry)
+
+
+	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Consumer Uses/'
+	consumerJSON = getJson(url)
+	item = consumerJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
+	consumer = [i['String'] for i in item]
+	print(consumer)
+
 	item = {
 		'compoundName':compound,
 		'CID': CID,
@@ -80,18 +91,20 @@ def getInfo(compound):
 		'IUPACName':molIUPAC,
 		'HSDBindex':HSDBindex,
 		'physicalProperties':physicalProperties,
-		'quantity':random.randint(1,1000)
+		'quantity':random.randint(1,1000),
+		'industry':industry,
+		'consumer':consumer
 	}
 
 	awstools.writeToDB('compoundInformation', item)
 
 if __name__ == '__main__':
-	# getInfo('chlorobenzene')
-	# getInfo('ethyne')
-	# getInfo('benzene')
-	# getInfo('methane')
-	# getInfo('ethanol')
-	# getInfo('bromobenzene')
-	# getInfo('sodium chloride')
-	# getInfo('sodium hydroxide')
-	# getInfo('potassium hydroxide')
+	getInfo('chlorobenzene')
+	getInfo('ethyne')
+	getInfo('benzene')
+	# getInfo('ethane')
+	getInfo('ethanol')
+	getInfo('bromobenzene')
+	getInfo('sodium chloride')
+	getInfo('sodium hydroxide')
+	getInfo('potassium hydroxide')

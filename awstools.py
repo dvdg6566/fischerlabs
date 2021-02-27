@@ -53,6 +53,7 @@ def checkPassword(username, password):
 		return check_password_hash(hashed,password)
 
 def getCurrentUserInfo():
+	print(dict(session))
 	try: 
 		username = dict(session)['username']
 	except KeyError:
