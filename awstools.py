@@ -145,8 +145,17 @@ def addItem(comp,currentVal,requestId):
 		x['items'].append({'compoundName':comp,'quantity':currentVal,'status':'-'})
 	ordersInfoTable.put_item(Item=x)
 
+def getOrders(username):
+	item = ordersInfoTable.scan(
+		ProjectionExpression='orderID,username,createdDate,#a,orderedDate',
+		ExpressionAttributeNames={'#a':'items'}
+	)['Items']
+	item = [i for i in item if i['username']==username]
+	return item
+
 if __name__ == '__main__':
-	pprint(getInventory())
+	getOrders('demo')
+	# pprint(getInventory())
 	# createUser('test2','test2')
 	# print(getOrderInfo(199))
 	# updateOrder(1000,[])

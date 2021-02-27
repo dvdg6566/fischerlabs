@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %} Profile {% endblock %} <!-- Title goes here -->
+{% block head %} {{ super() }} {% endblock %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+  {% for message in messages %}
+    <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}
+
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{category}} alert-dismissible fade show mt-4" role="alert">
+                  {{message}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+</div>
+
+<br>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/compoundview.css') }}">
+
+<div class="profile">
+	<table style="width:100%">
+		<tr>
+			<th style="width:50%; height: 15vh;">
+				<i class="far fa-user" style="transform: scale(7); margin-right: 0px, margin-left: auto; align:center; padding-left:13%"; ></i>
+			</th>
+			<th>
+				<table style="width:50%; margin-left: auto; margin-right: auto; border-collapse: collapse; padding: 10% 0px;">
+					<tr class="user-statistics statistics">
+						<td class="user-statistics">
+							<a>Total value of purchases</a>
+						</td>
+						<td class="statistics">
+							<a>$2079</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="user-statistics">
+							<a>Number of transactions</a>
+						</td>
+						<td class="statistics">
+							<a>2</a>
+						</td>
+					</tr>
+				</table>
+			</th>
+		</tr>
+	</table>
+</div>
+	<div class="business">
+		<table class="business">
+			<tr class="business">
+				<th class="business"> Current Orders </th>
+				<th class="business"> Past Orders </th>
+			</tr>
+			<tr class="business">
+				<td class="orders">
+					<table class="outstanding-orders">
+						<tr class="outstanding-orders">
+							<th class="outstanding-orders" style="text-align: left;"> Item </th>
+							<th class="outstanding-orders" style="text-align: left;"> Qty. </th>
+						</tr>
+						{%for order in currentOrders%}
+						<tr class="past-sales">
+							<td class="past-sales"> <a href='/order/{{order.orderID}}' {{order.orderID}} /> {{order.orderID}}</td>
+							<td class="past-sales"> ${{order.cost}} </td>
+						</tr>
+						{%endfor%}
+					</table>
+				</td>
+				<td class="orders">
+					<table class="past-sales">	
+						<tr class="past-sales">
+							<th class="past-sales" style="text-align: left;"> Identification </th>
+							<th class="past-sales" style="text-align: left;"> Date </th>
+							<th class="past-sales" style="text-align: left;"> Price </th>
+						</tr>
+						{%for order in oldOrders%}
+						<tr class="past-sales">
+							<td class="past-sales"> <a href='/order/{{order.orderID}}' {{order.orderID}} /> {{order.orderID}}</td>
+							<td class="past-sales"> {{order.createdDate}} </td>
+							<td class="past-sales"> ${{order.cost}} </td>
+						</tr>
+						{%endfor%}
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+{% endblock %}
+		
+
+
+

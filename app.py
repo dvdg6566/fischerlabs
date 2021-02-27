@@ -21,6 +21,7 @@ from flaskfiles.inventory import inventory
 from flaskfiles.login import login
 from flaskfiles.signup import signup
 from flaskfiles.order import order,changeOrder
+from flaskfiles.profile import profile
 
 app.add_url_rule('/', view_func = main, methods=['GET'])
 app.add_url_rule('/login', view_func = login, methods=['GET','POST'])
@@ -29,6 +30,7 @@ app.add_url_rule('/changeOrder',view_func=changeOrder,methods=['POST'])
 app.add_url_rule('/compound/<compound>', view_func = viewcompound, methods = ['GET', 'POST'])
 app.add_url_rule('/inventory', view_func = inventory, methods=['GET','POST'])
 app.add_url_rule('/signup', view_func = signup, methods=['GET','POST'])
+app.add_url_rule('/profile', view_func = profile, methods=['GET','POST'])
 app.add_url_rule('/order/<orderID>',view_func=order,methods=['GET','POST'])
 
 @app.route('/logout')
