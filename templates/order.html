@@ -12,9 +12,9 @@
 {% endwith %}
 {% block content %}
 
-<br>
+<br><link rel="stylesheet" href="{{ url_for('static', filename='css/order.css') }}">
 
-<div class="container">
+<!-- <div class="container">
 	<div class="container">
     	{% with messages = get_flashed_messages(with_categories=true) %}
     		{% if messages %}
@@ -55,21 +55,145 @@
 				<th scope="col">Quantity Ordered</th>
 				<th scope="col">Order Status</th>
 			</tr>
-			</thead>
+		</thead>
 			
-			<tbody>
+		<tbody>
 
-			{%for compound in items%}
-				<tr>
+		{%for compound in items%}
+			<tr>
 				<td scope="row">
 					<b> <a href="{{url_for('viewcompound', compound=compound.compoundName)}}" class="pl-2">{{compound.compoundName}}</a> </b>
 				</td>
-					<td>{{compound.quantity}}kg</td>
-					<td>{{compound.status}}</td>
-				</tr>
+				<td>{{compound.quantity}}kg</td>
+				<td>{{compound.status}}</td>
+			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+</div> -->
+
+<div class="row" style="width: 100%; margin-left:0px;">
+	<div class="column1">
+		<h1><img src="{{ url_for('static', filename='assets/order_header_narrow.png') }}" style="width:100%"></h1>
+  		<table class="orders">
+			<tr class="orders-1">
+				<th class="sn">
+					<a>S/N</a>
+				</th>
+				<th class="item">
+					<a>Item</a>
+				</th>
+				<th class="order-qty">
+					<a>Qty. (kg)</a>
+				</th>
+				<th class="unit-price"> 
+					<a>Unit Price</a>
+				</th>
+				<th class="subtotal">
+					<a>Subtotal</a>
+				</th>
+			</tr>
+			<tr class="orders">
+				<td class="sn">
+					<a>1.</a>
+				</td>
+				<td class="item">
+					<a href="/compound/ethanol" target="_blank" class="outgoing-link">Ethanol<i class="fas fa-external-link-square-alt" height=auto></i></a>
+				</td>
+				<td class="order-qty">
+					<a>97</a>
+				</td>
+				<td class="unit-price">
+					<a>$2/kg</a>
+				</td>
+				<td class="subtotal">
+					<a>$194</a>
+				</td>
+			</tr>
+  		</table>
+	</div>
+	<div class="column2" style="overflow: auto;">
+		<div>
+			<table class="editorder" style="width: 100%;">
+				<tr>
+					<th class="editorder-item editorder" style="width:53%">
+						<a>Item</a>
+					</th>
+					<th class="editorder-qty editorder">
+						<a>Qty. (kg)</a>
+					</th>
+				</tr>
+				<tr>
+					<td class="editorder-item editorder">
+						<div class="editorder-item" id="editorder-item">Ethanol</div>
+					</td>
+					<td class="editorder">
+						<div class="input-group plus-minus-input">
+	  						<div class="input-group-button">
+	  							<button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" id="decrease"><i class="fa fa-minus" aria-hidden="true"></i>
+								</button>
+							</div>
+							<input class="input-group-field" type="number" name="quantity" value="0">
+							<a class="input-group-button">
+								<button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</a>
+							<script type="text/javascript">
+								jQuery(document).ready(function(){
+								// This button will increment the value
+									$('[data-quantity="plus"]').click(function(e){
+									// Stop acting like a button
+										e.preventDefault();
+									// Get the field name
+										fieldName = $(this).attr('data-field');
+									// Get its current value
+										var currentVal = parseInt($('input[name='+fieldName+']').val());
+									// If is not undefined
+										if (!isNaN(currentVal)) {
+										// Increment
+											$('input[name='+fieldName+']').val(currentVal + 1);
+										} else {
+											// Otherwise put a 0 there
+											$('input[name='+fieldName+']').val(0);
+										}
+									});
+							// This button will decrement the value till 0
+								$('[data-quantity="minus"]').click(function(e) {
+								// Stop acting like a button
+									e.preventDefault();
+								// Get the field name
+									fieldName = $(this).attr('data-field');
+								// Get its current value
+									var currentVal = parseInt($('input[name='+fieldName+']').val());
+								// If it isn't undefined or its greater than 0
+									if (!isNaN(currentVal) && currentVal > 0) {
+									// Decrement one
+										$('input[name='+fieldName+']').val(currentVal - 1);
+									} else {
+									// Otherwise put a 0 there
+										$('input[name='+fieldName+']').val(0);
+									}
+								});
+							});
+							</script>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="totalcost">
+			<table style="width: 100%">
+				<tr>
+					<th>
+						<p id="totalcost-1">Total Cost:</p>
+					</th>
+					<th style="width:auto">
+						<p id="totalcost-2">$2030992.90</p>
+					</th>
+				</tr>
+			</table>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

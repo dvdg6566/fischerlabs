@@ -1,0 +1,195 @@
+.thintable{
+    padding: 5px !important;
+	text-align: center;
+	font-size: 16px;
+}
+
+.newuserinput{
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+.cm-line{
+	font-size: 3px;
+}
+
+form {
+	display: inline;
+}
+
+.CodeMirror {
+	font-family: Arial, monospace;
+	font-size: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column1 {
+  float: left;
+  width: 70%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.totalcost {
+  position: absolute;
+  bottom: 0px;
+  width: 29%; /*(this was hard coded in)*/
+}
+
+#totalcost-1 {
+  padding: 0.5em 0.4em;
+  margin-top: auto;
+  margin-bottom: auto;
+  font: bold 30px Verdana;
+}
+
+#totalcost-2 {
+  padding: 0.5em 0.5em;
+  margin-top: auto;
+  margin-bottom: auto;
+  font: 25px Verdana;
+  text-align: right;
+}
+
+table.orders {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th.item {
+  width: 60%;
+}
+
+.sn {
+  width: 5.5%;
+  text-align: center;
+}
+
+.order-qty, .unit-price, .subtotal {
+  width: 11.5%;
+  text-align: center;
+}
+
+th.sn, th.item, th.order-qty, th.unit-price, th.subtotal {
+  padding: 1em 1em;
+  margin-bottom: auto;
+  margin-top: auto;
+  background: #5e7aa7;
+  font: bold 15px Verdana;
+  color: white;
+}
+
+td.item, td.order-qty, td.unit-price, td.subtotal {
+  padding: 0.75em;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+tr.orders:hover {
+  background-color: lightgrey;
+}
+
+tr.orders, tr.orders-1 {
+  border: 2px solid darkgrey;
+}
+
+.outgoing-link:link {
+  color: blue;
+}
+
+.outgoing-link:hover, a.outgoing-link:active{
+  cursor: pointer;
+  text-decoration:underline;
+}
+
+#increase, #decrease {
+  width: 3rem;
+  height: 3rem;
+  transform: scale(0.80);
+  background-color: transparent;
+  border: 2px solid #383c44;
+  color: 2px ;
+}
+
+#increase:hover, #decrease:hover {
+  background-color: lightgrey;
+}
+
+
+.plus-minus-input {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+  text-align: center;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  padding: 1rem;
+  width: 5rem;
+  height: 0.5rem;
+}
+
+.plus-minus-input {
+  float: right;
+  width: auto;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.plus-minus-input .input-group-button .circle {
+  border-radius: 50%;
+}
+
+th.editorder-item, td.editorder-item {
+  padding: 0.5em 0.5em;
+  text-align: left;
+  width: 53%;
+  overflow: hidden;
+}
+
+#editorder-item {
+  padding: 0.5em 0.5em;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 13em;
+}
+
+.editorder-qty {
+  padding: 0.5em 0.5em;
+  text-align: center;
+}
+
+th.editorder-qty {
+  width: 47%;
+}
+
+th.editorder, td.editorder {
+  border-bottom: 2px solid darkgrey;
+}
