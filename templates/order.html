@@ -1,12 +1,34 @@
 {% extends "base.html" %}
 {% block title %} Order {% endblock %} <!-- Title goes here -->
 {% block head %} {{ super() }} {% endblock %}
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 {% block content %}
 
 <br>
 
 <div class="container">
+	<div class="container">
+    	{% with messages = get_flashed_messages(with_categories=true) %}
+    		{% if messages %}
+            		{% for category, message in messages %}
+                            	<div class="alert alert-{{category}} alert-dismissible fade show mt-4" role="alert">
+                                    	{{message}}
+                                           	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            	<span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                            {% endfor %}
+                    {% endif %}
+           	{% endwith %}
+    </div>
 	<h1>Order {{orderinfo.orderID}}</h1>
 	<p> Order placed by: {{orderinfo.username}} </p>
 	<p> Order form created on: {{orderinfo.createdDate}} </p>
@@ -16,6 +38,15 @@
 	{%else%}
 	<p> Order form submitted on: {{orderinfo.orderedDate}} </p>
 	{%endif%}
+
+	<form action="" method="post" class="form-group" enctype="multipart/form-data">
+		Upload Order(csv):
+		<input type="file" name="order" accept=".csv">
+		<input type="hidden" name="form_name" value="csv_upload">
+		<input type="submit" value="Upload" class="btn btn-secondary">
+	</form>
+	<br>
+	<br>
 
 	<table class="table table-hover" id="myTable">
 		<thead class="thead-dark">
