@@ -15,3 +15,6 @@ class SignupForm(FlaskForm):
 	username = TextAreaField('Username')
 	password = TextAreaField('Password')
 	submit = SubmitField('Sign Up')
+
+class Order(FlaskForm):
+	submit = SubmitField('Submit Code')

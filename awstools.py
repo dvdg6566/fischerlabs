@@ -91,7 +91,7 @@ def createUser(username,password):
 		return True
 
 def getOrderInfo(xx):
-	print(xx)
+	# print(xx)
 	try:
 		item = ordersInfoTable.query(
 			KeyConditionExpression = Key('orderID').eq(xx)
@@ -113,10 +113,15 @@ def createOrder(id,username):
 		'orderedDate':-1, # 8 digit number or -1
 		'createdDate':getCurrentDateTime()
 	}
-	print(item)
+	# print(item)
+	ordersInfoTable.put_item(Item=item)
+
+
+def kms(id,item):
 	ordersInfoTable.put_item(Item=item)
 
 if __name__ == '__main__':
-	# pprint(getInventory())
-	createUser('test2','test2')
-	print(getOrderInfo(199))
+	pprint(getInventory())
+	# createUser('test2','test2')
+	# print(getOrderInfo(199))
+	# updateOrder(1000,[])
