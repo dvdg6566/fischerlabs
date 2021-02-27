@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>navbar</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">	
+	
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"></link>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/clike/clike.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" href="compound view admin.css">
+		<script src="https://kit.fontawesome.com/4f180a7760.js" crossorigin="anonymous"></script>
+</head>
+	<body>
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky top">
+			<a class="navbar-brand" href="/">Fischerlabs</a>
+			
+			<!-- Links -->
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/inventory">Inventory</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/labsets">Labsets</a>
+				</li>
+				<li>
+					<a class="nav-link" href="/requests"> Requests </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/admin">Admin</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav ml-auto mr-3">
+				<li>
+					<a class="nav-link" href="/cart"> Cart <i class="fas fa-shopping-cart" height="auto"></i></a>
+				</li>
+				<li>
+					<a class="nav-link" href="/account"> Account <i class="fas fa-user" height="auto"></i></a>
+				</li>
+				<li>
+					<a class="nav-link" href="/logout"> Logout <i class="fas fa-sign-out-alt" height="auto"></i></a>
+				</li>
+			</ul>
+		</nav>
+	</body>
+</html>
