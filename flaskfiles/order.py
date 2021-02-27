@@ -3,20 +3,33 @@ import awstools
 from forms import Order
 import pandas as pd
 
+def changeOrder():
+    print("HELLO")
+    ind=request.form['ind']
+    currentVal=request.form['currentVal']
+    userinfo = awstools.getCurrentUserInfo()
+    orderID = userinfo['currentOrder']
+    orderinfo = awstools.getOrderInfo(int(orderID))
+    comp = orderinfo['items'][int(ind)-1]['compoundName']
+    print(comp,currentVal,orderID)
+    awstools.addItem(comp,currentVal,orderID)
+    return 'Success'
+
 def order(orderID):
     userinfo = awstools.getCurrentUserInfo()
-    print(orderID)
     orderinfo = awstools.getOrderInfo(int(orderID))
 
     form = Order()
 
     if (orderinfo == None):
         return redirect('/')
-    print(orderinfo['items'])
 
     cost=0
+    k=1
     for i in orderinfo['items']:
         cost+=5*i['quantity']
+        i['ind']=k
+        k+=1
 
     if form.is_submitted():
         result = request.form
@@ -50,7 +63,6 @@ def order(orderID):
                     if not done:
                         items.append({'compoundName':name,'quantity':int(vol),'status':'-'})
                 orderinfo['items'] = items
-                print(int(orderID))
                 awstools.kms(orderID,orderinfo)
                 # for i in range(x):
 

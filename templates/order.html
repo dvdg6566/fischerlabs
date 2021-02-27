@@ -38,7 +38,7 @@
 			{%for i in items%}
 			<tr class="orders">
 				<td class="sn">
-					<a>1.</a>
+					<a>{{i.ind}}.</a>
 				</td>
 				<td class="item">
 					<a href="/compound/{{i.compoundName}}" target="_blank" class="outgoing-link">{{i.compoundName}}<i class="fas fa-external-link-square-alt" height=auto></i></a>
@@ -75,56 +75,19 @@
 					<td class="editorder">
 						<div class="input-group plus-minus-input">
 	  						<div class="input-group-button">
-	  							<button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" id="decrease"><i class="fa fa-minus" aria-hidden="true"></i>
+	  							<button type="button" class="button hollow circle" data-quantity="minus{{i.ind}}" data-field="quantity" id="decrease" clown={{i.ind}}><i class="fa fa-minus" aria-hidden="true"></i>
 								</button>
 							</div>
-							<input class="input-group-field" type="number" name="quantity" value="0">
+							<input class="input-group-field" type="number" name="quantity{{i.ind}}" value="{{i.quantity}}">
 							<a class="input-group-button">
-								<button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
+								<button type="button" class="button hollow circle" data-quantity="plus{{i.ind}}" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
 								</button>
 							</a>
 						</div>
 					</td>
 				</tr>
 				{%endfor%}
-				<script type="text/javascript">
-					jQuery(document).ready(function(){
-					// This button will increment the value
-						$('[data-quantity="plus"]').click(function(e){
-						// Stop acting like a button
-							e.preventDefault();
-						// Get the field name
-							fieldName = $(this).attr('data-field');
-						// Get its current value
-							var currentVal = parseInt($('input[name='+fieldName+']').val());
-						// If is not undefined
-							if (!isNaN(currentVal)) {
-							// Increment
-								$('input[name='+fieldName+']').val(currentVal + 1);
-							} else {
-								// Otherwise put a 0 there
-								$('input[name='+fieldName+']').val(0);
-							}
-						});
-				// This button will decrement the value till 0
-					$('[data-quantity="minus"]').click(function(e) {
-					// Stop acting like a button
-						e.preventDefault();
-					// Get the field name
-						fieldName = $(this).attr('data-field');
-					// Get its current value
-						var currentVal = parseInt($('input[name='+fieldName+']').val());
-					// If it isn't undefined or its greater than 0
-						if (!isNaN(currentVal) && currentVal > 0) {
-						// Decrement one
-							$('input[name='+fieldName+']').val(currentVal - 1);
-						} else {
-						// Otherwise put a 0 there
-							$('input[name='+fieldName+']').val(0);
-						}
-					});
-				});
-				</script>
+				<script type="text/javascript" src="{{url_for('static',filename='order.js')}}"></script>
 			</table>
 		</div>
 		<div class="totalcost">
