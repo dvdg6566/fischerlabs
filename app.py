@@ -16,7 +16,6 @@ app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_NAME'] = 'login-session'
 
 from flaskfiles.main import main
-from flaskfiles.admin import admin
 from flaskfiles.viewcompound import viewcompound,addItem
 from flaskfiles.inventory import inventory
 from flaskfiles.login import login
@@ -24,7 +23,6 @@ from flaskfiles.signup import signup
 from flaskfiles.order import order,changeOrder
 
 app.add_url_rule('/', view_func = main, methods=['GET'])
-app.add_url_rule('/admin', view_func = admin, methods=['GET'])
 app.add_url_rule('/login', view_func = login, methods=['GET','POST'])
 app.add_url_rule('/addItem',view_func=addItem,methods = ['POST'])
 app.add_url_rule('/changeOrder',view_func=changeOrder,methods=['POST'])

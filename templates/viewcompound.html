@@ -109,9 +109,39 @@
 									'currentVal':currentVal
 								}
 								$.post('/addItem',params)
+								// clown()
 								alert('Success!')
 							}
-					</script>
+						</script>
+						<!-- <script>
+							clown = () => {
+								// Get the modal
+								var modal1 = document.getElementById("myModal-1");
+
+								// Get the button that opens the modal
+								var btn1 = document.getElementById("addtocart");
+
+								// Get the <span> element that closes the modal
+								var span1 = document.getElementsByClassName("close")[0];
+
+								// When the user clicks the button, open the modal 
+								btn1.onclick = function() {
+								  modal1.style.display = "block";
+								}
+
+								// When the user clicks on <span> (x), close the modal
+								span1.onclick = function() {
+								  modal1.style.display = "none";
+								}
+
+								// When the user clicks anywhere outside of the modal, close it
+								window.onclick = function(event) {
+								  if (event.target == modal1) {
+								    modal1.style.display = "none";
+								  }
+								}
+							}
+						</script> -->
 					</div>
 				</th>
 				<th style="width: 10%;">
@@ -119,6 +149,14 @@
 				</th>
 			</tr>
 		</table>
+	</div>
+	<div id="myModal-1" class="modal">
+		<div class="modal-content">
+			<p>
+				<span class="close">&times;</span>
+			</p>
+			<p>Success!</p>
+		</div>
 	</div>
 	<div id="myModal" class="modal">
 	  <!-- Modal content -->
@@ -130,16 +168,7 @@
 	    <p> {{', '.join(compoundInfo.synonyms[3:])}}</p>
 	  </div>
 	</div>
-<!-- 	FOR ADMIN -->
-<!-- 	<div style="overflow: auto; padding-top: 10px; width: 100%;">
-		<a class="header" id="compoundname"> {{compoundInfo.compoundName}} </a>
-		{%if compoundInfo.imgURL != None %}
-		<a class="header" class="nfpa-rating" class="clearfix"> <img src={{compoundInfo.imgURL}} class="clearfix" width=auto height=auto> </a>
-		{%else%}
-		<a class="header" class="nfpa-rating" class="clearfix"> <img src=https://pubchem.ncbi.nlm.nih.gov/image/nfpa.cgi?code=000 class="clearfix" width=auto height=auto style="visibility: hidden"> </a>
-		{%endif%}
-		<a class="current-inventory"> Current Inventory: {{compoundInfo.quantity}}kg </a>
-	</div> -->
+
 	<div id="myModal" class="modal">
 	  <!-- Modal content -->
 	  <div class="modal-content">
