@@ -58,7 +58,7 @@ def order(orderID):
                     done = 0
                     for i in items:
                         if i['compoundName'] == name:
-                            i['quantity'] += int(vol)
+                            i['quantity'] = int(vol)
                             done = 1
                     if not done:
                         items.append({'compoundName':name,'quantity':int(vol),'status':'-'})

@@ -55,6 +55,13 @@
 			</tr>
 			{%endfor%}
   		</table>
+  		<br>
+  		<form action="" method="post" class="form-group" enctype="multipart/form-data">
+			Upload Order(csv):
+			<input type="file" name="order" accept=".csv">
+			<input type="hidden" name="form_name" value="csv_upload">
+			<input type="submit" value="Upload" class="btn btn-secondary">
+		</form>
 	</div>
 	<div class="column2" style="overflow: auto;">
 		<div>
