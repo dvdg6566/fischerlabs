@@ -70,18 +70,35 @@ def getInfo(compound):
 	molWeight = Decimal(molWeight)
 	molWeight = round(molWeight,2)
 
-	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Industry Uses/'
-	industryJSON = getJson(url)
-	item = industryJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
-	industry = [i['String'] for i in item]
-	print(industry)
+	try:
+		url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Industry Uses/'
+		industryJSON = getJson(url)
+		item = industryJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
+		industry = [i['String'] for i in item]
+		print(industry)
+	except:
+		industry = []
 
+	try:
+		url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Consumer Uses/'
+		consumerJSON = getJson(url)
+		item = consumerJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
+		consumer = [i['String'] for i in item]
+		print(consumer)
+	except:
+		consumer = []
 
-	url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=Consumer Uses/'
-	consumerJSON = getJson(url)
-	item = consumerJSON['Record']['Section'][0]['Section'][0]['Section'][0]['Information'][0]['Value']['StringWithMarkup']
-	consumer = [i['String'] for i in item]
-	print(consumer)
+	try:
+		lookup = 'https://pubchem.ncbi.nlm.nih.gov/image/nfpa.cgi?code='
+		url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{CID}/JSON?heading=NFPA Hazard Classification'
+		linkJSON = json.dumps(getJson(url))
+		x = linkJSON.find(lookup) + len(lookup)
+		while linkJSON[x] != '"':
+			lookup += (linkJSON[x])
+			x += 1
+		print(lookup)
+	except:
+		lookup = None
 
 	item = {
 		'compoundName':compound,
@@ -93,7 +110,9 @@ def getInfo(compound):
 		'physicalProperties':physicalProperties,
 		'quantity':random.randint(1,1000),
 		'industry':industry,
-		'consumer':consumer
+		'consumer':consumer,
+		'synonyms':SYN[:100],
+		'imgURL':lookup
 	}
 
 	awstools.writeToDB('compoundInformation', item)
@@ -102,7 +121,7 @@ if __name__ == '__main__':
 	getInfo('chlorobenzene')
 	getInfo('ethyne')
 	getInfo('benzene')
-	# getInfo('ethane')
+	getInfo('ethane')
 	getInfo('ethanol')
 	getInfo('bromobenzene')
 	getInfo('sodium chloride')

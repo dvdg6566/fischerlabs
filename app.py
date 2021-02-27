@@ -25,7 +25,7 @@ from flaskfiles.signup import signup
 app.add_url_rule('/', view_func = main, methods=['GET'])
 app.add_url_rule('/admin', view_func = admin, methods=['GET'])
 app.add_url_rule('/login', view_func = login, methods=['GET','POST'])
-app.add_url_rule('/compound/<compName>', view_func = viewcompound, methods = ['GET', 'POST'])
+app.add_url_rule('/compound/<compound>', view_func = viewcompound, methods = ['GET', 'POST'])
 app.add_url_rule('/inventory', view_func = inventory, methods=['GET','POST'])
 app.add_url_rule('/signup', view_func = signup, methods=['GET','POST'])
 

@@ -1,8 +1,10 @@
 from flask import render_template, redirect
 import awstools
 
-def viewcompound(compName):
-	compId = awstools.getCompoundCID(compName)
+def viewcompound(compound):
 	userinfo = awstools.getCurrentUserInfo()
-
-	return render_template('viewcompound.html',compName=compName,compId=compId,userinfo=userinfo)
+	compoundInfo = awstools.getCompoundDetails(compound)
+	compoundInfo['compoundName']=compoundInfo['compoundName'].title()
+	HSDB = compoundInfo['HSDBindex']
+	compoundInfo['synonyms'] = [i.title() for i in compoundInfo['synonyms']]
+	return render_template('viewcompound.html',compoundInfo=compoundInfo,userinfo=userinfo)

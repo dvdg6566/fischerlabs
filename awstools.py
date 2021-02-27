@@ -29,8 +29,13 @@ def getInventory():
 	items.sort(key=lambda x:x['compoundName'])
 	return items
 
+def getCompoundDetails(compound):
+	items = compoundInfoTable.query(
+		KeyConditionExpression = Key('compoundName').eq(compound)
+	)['Items']
+	return items[0]
+
 def getPUBName(compoundName):
-	
 	item = compoundSearchTable.query(
 		KeyConditionExpression = Key('searchKey').eq(compoundName)
 	)['Items']

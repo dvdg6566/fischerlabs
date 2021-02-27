@@ -53,7 +53,7 @@
 			{% for compound in compoundInfo %}
 				<tr>
 				<td scope="row">
-					<b> <a href="{{url_for('viewcompound', compName=compound.compoundName)}}" class="pl-2">{{compound.compoundName}}</a> </b>
+					<b> <a href="{{url_for('viewcompound', compound=compound.compoundName)}}" class="pl-2">{{compound.compoundName}}</a> </b>
 				</td>
 					<td>{{compound.molecularFormula}}</td>
 					<td>{{compound.quantity}}kg</td>
