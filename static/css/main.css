@@ -26,13 +26,6 @@ form {
 	font-size: 14px;
 }
 
-.inputfield-blank {
-	height: 5vh;
-	border: 2px solid blue;
-	width: 80%;
-	padding: 10px 20px;
-}
-
 .mb-3{
 	vertical-align: middle;
 }
@@ -91,4 +84,9 @@ form {
 .btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-secondary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.img1, .img2, .img3 {
+  padding: 0px 3%;
+  background-color: #d8e4f4;
 }
