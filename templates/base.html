@@ -48,9 +48,6 @@
 				<li>
 					<a class="nav-link" href="/order/{{userinfo.currentOrder}}"> Cart <i class="fas fa-shopping-cart" height="auto"></i></a>
 				</li>
-				<li>
-					<a class="nav-link" href="/profile"> Profile <i class="fas fa-user" height="auto"></i></a>
-				</li>
 				{% if userinfo.username == None %}
 				<li>
 					<a class="nav-link" href="/login"> Login </a>
@@ -63,7 +60,7 @@
 						</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/profile/{{userinfo.username}}"> Profile </a>
-						<a class="dropdown-item" href="/logout"> Logout <i class="fas fa-sign-out-alt" height="auto"></a>
+						<a class="dropdown-item" href="/logout"> Logout </a>
 					</div>
 				</ul>
 				{% endif %}
