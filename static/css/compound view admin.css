@@ -1,0 +1,190 @@
+/* navbar or things that were already here */
+
+.thintable{
+    padding: 5px !important;
+	text-align: center;
+	font-size: 16px;
+}
+
+.newuserinput{
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+.cm-line{
+	font-size: 3px;
+}
+
+form {
+	display: inline;
+}
+
+.CodeMirror {
+	font-family: Verdana, monospace;
+	font-size: 14px;
+}
+
+/* things by jit*/
+
+body {
+	font-family: Verdana;
+}
+
+.header {
+	font-size: 40px;
+	font-family: Georgia;
+	padding: 20px 40px;
+	text-align: left;
+}
+
+a.synonyms, #more-synonyms {
+	color: #303030;
+}
+
+#more-synonyms {
+	background-color: transparent;
+	border: none;
+	border-style: none;
+	padding: 0px;
+	width: auto;
+	text-decoration: underline;
+}
+
+#more-synonyms:hover {
+	cursor: pointer;
+	color: grey;
+}
+
+.header2 {
+	font-size: 30px;
+	font-family: Georgia;
+	text-align: left;
+	width: 30%;
+}
+
+a.current-inventory {
+	padding: 1.5em 30px 1.5em;
+	font: 25px Verdana;
+	width: auto;
+	text-align: right;
+	float: right;
+}
+
+a.nfpa-rating {
+	margin-left: 5%;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+span.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: Arial;
+  width: 1em;
+  text-align: center;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+div.business, div.compound, div.uses {
+	padding: 2% 3%;
+}
+
+th.business, th.properties-h, th.hazard, th.industrial, th.consumer {
+	text-align: center;
+	font: bold 25px Verdana;
+	padding: 1%;
+}
+
+table.outstanding-orders, table.past-sales, table.properties {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
+}
+
+th.outstanding-orders, th.past-sales, th.properties {
+	background-color: #008bfc;
+	color: white;
+}
+
+tr.properties, tr.past-sales, tr.outstanding-orders {
+	border: 2px solid darkgrey;
+}
+
+#qty1, #qty2 {
+	width: 20%;
+}
+
+table.compound, table.properties, table.business, table.uses {
+	width: 100%;
+}
+
+tr.properties:hover, tr.outstanding-orders:hover, tr.past-sales:hover {
+	background-color: lightgrey;
+}
+
+th.properties, td.properties, th.outstanding-orders, td.outstanding-orders, th.past-sales, td.past-sales {
+	padding: 0.5em 0.5em	;
+}
+
+#property {
+	width: 35%;
+}
+
+td.properties-d, td.hazard{
+	padding: 1%;
+}
+
+a.outgoing-link:link {
+	color: blue;
+}
+
+a.outgoing-link:hover, a.outgoing-link:active{
+	cursor: pointer;
+	text-decoration:underline;
+}
+
+a.outgoing-link:visited {
+	color: purple;
+}
+
+th.industrial, th.consumer, th.properties-h, th.hazard, th.business {
+	text-align: center;
+	width: 50%;
+}
