@@ -122,7 +122,7 @@ if __name__ == '__main__':
 	# table = pd.read_csv('assets/chem_database_v1.csv')
 	# print(table.shape)
 
-	getInfo('1,2,5,6,9,10-Hexabromocyclododecane')
+	getInfo('Decabromodiphenyl ether')
 	# getInfo('chlorobenzene')
 	# getInfo('ethyne')
 	# getInfo('benzene')

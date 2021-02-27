@@ -2,6 +2,7 @@ import boto3
 from uuid import uuid4
 from pprint import pprint
 from flask import session
+from datetime import datetime
 from boto3.dynamodb.conditions import Key, Attr
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -9,6 +10,7 @@ dynamodb = boto3.resource('dynamodb')
 compoundSearchTable = dynamodb.Table('compoundSearch')
 compoundInfoTable = dynamodb.Table('compoundInformation')
 userInfoTable = dynamodb.Table('userInformation')
+ordersInfoTable = dynamodb.Table('ordersInformation')
 
 def writeToDB(DBname, item):
 	if DBname == 'compoundSearch':
@@ -62,8 +64,11 @@ def getCurrentUserInfo():
 	try: 
 		username = dict(session)['username']
 	except KeyError:
-		username = None
-	return {'username':username,'role':'admin'}
+		return {'username':None}
+	item = userInfoTable.query(
+		KeyConditionExpression = Key('username').eq(username)
+	)['Items']
+	return item[0]
 
 def createUser(username,password):
 	item = userInfoTable.query(
@@ -73,13 +78,45 @@ def createUser(username,password):
 		return False
 	else:
 		hashed = generate_password_hash(password)
-		item = {'username':username,'password':hashed,'orders':[],'role':'buyer','currentOrder':uuid4()}
+		with open('latestorder.txt','r') as file:
+			x = file.read()
+			id = int(x)
+		print(id)
+		id += 1
+		createOrder(id,username)
+		with open('latestorder.txt','w') as file:
+			file.write(str(id))
+		item = {'username':username,'password':hashed,'role':'buyer','currentOrder':id}
 		userInfoTable.put_item(Item=item)
 		return True
 
+def getOrderInfo(xx):
+	print(xx)
+	try:
+		item = ordersInfoTable.query(
+			KeyConditionExpression = Key('orderID').eq(xx)
+		)['Items']
+		return item[0]
+	except:
+		return None
+
+def getCurrentDateTime():
+	now = datetime.now()
+	dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+	return dt_string
+
+def createOrder(id,username):
+	item = {
+		'orderID':id,
+		'username':username,
+		'items':[], # Item ID and quantity
+		'orderedDate':-1, # 8 digit number or -1
+		'createdDate':getCurrentDateTime()
+	}
+	print(item)
+	ordersInfoTable.put_item(Item=item)
+
 if __name__ == '__main__':
 	# pprint(getInventory())
-	pprint(getPUBName('ethyne'))
-	h = generate_password_hash('hello')
-	y = generate_password_hash('hello')
-	print(check_password_hash(h,'hello'))
+	createUser('test2','test2')
+	print(getOrderInfo(199))

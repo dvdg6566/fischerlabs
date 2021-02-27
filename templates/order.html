@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Order {% endblock %} <!-- Title goes here -->
+{% block head %} {{ super() }} {% endblock %}
+
+{% block content %}
+
+<br>
+
+<div class="container">
+	<h1>Order {{orderinfo.orderID}}</h1>
+	<p> Order placed by: {{orderinfo.username}} </p>
+	<p> Order form created on: {{orderinfo.createdDate}} </p>
+
+	{%if orderinfo.orderedDate == -1%}
+	<p> Order has not been placed </p>
+	{%else%}
+	<p> Order form submitted on: {{orderinfo.orderedDate}} </p>
+	{%endif%}
+
+	<table class="table table-hover" id="myTable">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Compound Name</th>
+				<th scope="col">Quantity Ordered</th>
+				<th scope="col">Order Status</th>
+			</tr>
+			</thead>
+			
+			<tbody>
+
+			{%for compound in items%}
+				<tr>
+				<td scope="row">
+					<b> <a href="{{url_for('viewcompound', compound=compound.compoundName)}}" class="pl-2">{{compound.compoundName}}</a> </b>
+				</td>
+					<td>{{compound.quantity}}kg</td>
+					<td>{{compound.status}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
