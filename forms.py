@@ -3,7 +3,7 @@ from wtforms import StringField, IntegerField, DecimalField, BooleanField, Selec
 
 class SearchCompoundForm(FlaskForm):
     compound = TextAreaField('Code Goes Here')
-    submit = SubmitField('Submit Code')
+    submit = SubmitField('Search')
 
 class LoginForm(FlaskForm):
 	username = TextAreaField('Username')
