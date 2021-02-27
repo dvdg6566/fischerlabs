@@ -5,14 +5,81 @@
 {% block content %}
 	<br>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/compoundview.css') }}">
-	<div style="overflow: auto; padding-top: 10px">
-			<a class="header" id="compoundname"> {{compoundInfo.compoundName}} </a>
-			{%if compoundInfo.imgURL != None %}
-			<a class="header" class="nfpa-rating" class="clearfix"> <img src={{compoundInfo.imgURL}} class="clearfix" width=auto height=auto> </a>
-			{%else%}
-			<a class="header" class="nfpa-rating" class="clearfix"> <img src=https://pubchem.ncbi.nlm.nih.gov/image/nfpa.cgi?code=000 class="clearfix" width=auto height=auto style="visibility: hidden"> </a>
-			{%endif%}
-			<a class="current-inventory"> Current Inventory: {{compoundInfo.quantity}}kg </a>
+<!-- 	FOR BUYER -->
+	<div style="overflow: auto; padding-top: 10px; width: 100%;">
+		<table>
+			<tr>
+				<th style="width: 60%;">
+					<a class="header" id="compoundname"> {{compoundInfo.compoundName}} </a>
+					{%if compoundInfo.imgURL != None %}
+					<a class="header" class="nfpa-rating" class="clearfix"> <img src={{compoundInfo.imgURL}} class="clearfix" width=auto height=auto> </a>
+					{%else%}
+					<a class="header" class="nfpa-rating" class="clearfix"> <img src=https://pubchem.ncbi.nlm.nih.gov/image/nfpa.cgi?code=000 class="clearfix" width=auto height=auto style="visibility: hidden"> </a>
+					{%endif%}
+				</th>
+				<th style="width: 30%;">
+					<!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+					<div class="input-group plus-minus-input">
+  						<div class="input-group-button">
+  							<button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" id="decrease"><i class="fa fa-minus" aria-hidden="true"></i>
+							</button>
+						</div>
+						<input class="input-group-field" type="number" name="quantity" value="0">
+						<div class="input-group-button">
+							<button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
+							</button>
+						</div>
+						<script type="text/javascript">
+							jQuery(document).ready(function(){
+							// This button will increment the value
+								$('[data-quantity="plus"]').click(function(e){
+								// Stop acting like a button
+									e.preventDefault();
+								// Get the field name
+									fieldName = $(this).attr('data-field');
+								// Get its current value
+									var currentVal = parseInt($('input[name='+fieldName+']').val());
+								// If is not undefined
+									if (!isNaN(currentVal)) {
+									// Increment
+										$('input[name='+fieldName+']').val(currentVal + 1);
+									} else {
+										// Otherwise put a 0 there
+										$('input[name='+fieldName+']').val(0);
+									}
+								});
+						// This button will decrement the value till 0
+							$('[data-quantity="minus"]').click(function(e) {
+							// Stop acting like a button
+								e.preventDefault();
+							// Get the field name
+								fieldName = $(this).attr('data-field');
+							// Get its current value
+								var currentVal = parseInt($('input[name='+fieldName+']').val());
+							// If it isn't undefined or its greater than 0
+								if (!isNaN(currentVal) && currentVal > 0) {
+								// Decrement one
+									$('input[name='+fieldName+']').val(currentVal - 1);
+								} else {
+								// Otherwise put a 0 there
+									$('input[name='+fieldName+']').val(0);
+								}
+							});
+						});
+						</script>
+					</div>
+				</th>
+				<th style="width: 10%;">
+					<a class="addtocart" style="overflow: auto;"> <button id="addtocart">Add to Cart</button></a>
+				</th>
+			</tr>
+		</table>
+	<script type="text/javascript">
+		var btn_addtocart = document.getElementById("addtocart");
+		btn_addtocart = function() {
+
+		}
+	</script>
 	</div>
 	<div id="myModal" class="modal">
 	  <!-- Modal content -->
@@ -24,8 +91,28 @@
 	    <p> {{', '.join(compoundInfo.synonyms[3:])}}</p>
 	  </div>
 	</div>
+<!-- 	FOR ADMIN -->
+<!-- 	<div style="overflow: auto; padding-top: 10px; width: 100%;">
+		<a class="header" id="compoundname"> {{compoundInfo.compoundName}} </a>
+		{%if compoundInfo.imgURL != None %}
+		<a class="header" class="nfpa-rating" class="clearfix"> <img src={{compoundInfo.imgURL}} class="clearfix" width=auto height=auto> </a>
+		{%else%}
+		<a class="header" class="nfpa-rating" class="clearfix"> <img src=https://pubchem.ncbi.nlm.nih.gov/image/nfpa.cgi?code=000 class="clearfix" width=auto height=auto style="visibility: hidden"> </a>
+		{%endif%}
+		<a class="current-inventory"> Current Inventory: {{compoundInfo.quantity}}kg </a>
+	</div> -->
+	<div id="myModal" class="modal">
+	  <!-- Modal content -->
+	  <div class="modal-content">
+	    <p>
+	    	<a class="header2"> Known synonyms: </a>
+	    	<span class="close">&times;</span>
+	    </p>
+	    <p> {{', '.join(compoundInfo.synonyms[3:])}}</p>
+	  </div>
+	</div>
 	<div>
-		<p class="synonyms"> {{', '.join(compoundInfo.synonyms[:3])}}<button id="more-synonyms">...more</button></p></th>
+		<p class="synonyms"> {{', '.join(compoundInfo.synonyms[:3])}}... <button id="more-synonyms">more</button></p></th>
 	</div>
 	<script>
 		// Get the modal

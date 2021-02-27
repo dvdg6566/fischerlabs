@@ -53,7 +53,7 @@ p.synonyms, #more-synonyms {
 }
 
 p.synonyms {
-	padding: 1% 3%;
+	padding: 3% 5%;
 }
 
 #more-synonyms {
@@ -84,6 +84,76 @@ a.current-inventory {
 	text-align: right;
 	float: right;
 }
+
+#addtocart {
+	padding: 0.5em 1em;
+	font: bold 20px Verdana;
+	text-align: middle;
+/*	float: right;*/
+	background-color: darkorange;
+	border-style: none;
+	border-radius: 15px;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: white;
+	width: 10vw;
+}
+
+#addtocart:hover {
+	background-color: #e8772c;
+}
+
+a.addtocart {
+	padding: 0px;
+	margin-right: 0%;
+	float: right;
+}
+
+#increase, #decrease {
+	width: 3rem;
+	height: 3rem;
+	transform: scale(0.80);
+	background-color: transparent;
+	border: 2px solid #383c44;
+	color: 2px ;
+}
+
+#increase:hover, #decrease:hover {
+	background-color: lightgrey;
+}
+
+
+.plus-minus-input {
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+	text-align: center;
+	margin-left: 0.75rem;
+	margin-right: 0.75rem;
+	padding: 1rem;
+	width: 5rem;
+	height: 0.5rem;
+}
+
+.plus-minus-input {
+	float: right;
+	width: auto;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.plus-minus-input .input-group-button .circle {
+	border-radius: 50%;
+	padding: 0.25em 0.8em;
+}
+
 
 a.nfpa-rating {
 	margin-left: 5%;
@@ -203,4 +273,8 @@ a.outgoing-link:visited {
 th.industrial, th.consumer, th.properties-h, th.hazard, th.business {
 	text-align: center;
 	width: 50%;
+}
+
+td.industrial-l, td.consumer-l {
+	vertical-align: top;
 }
