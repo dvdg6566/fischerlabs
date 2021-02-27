@@ -1,4 +1,4 @@
-from flask import render_template, redirect
+from flask import render_template, redirect,request,flash
 import awstools
 
 def viewcompound(compound):
@@ -7,4 +7,14 @@ def viewcompound(compound):
 	compoundInfo['compoundName']=compoundInfo['compoundName'].title()
 	HSDB = compoundInfo['HSDBindex']
 	compoundInfo['synonyms'] = [i.title() for i in compoundInfo['synonyms']]
-	return render_template('viewcompound.html',compoundInfo=compoundInfo,userinfo=userinfo)
+	current=awstools.getcurrent(userinfo['currentOrder'],compound)
+	return render_template('viewcompound.html',compoundInfo=compoundInfo,userinfo=userinfo,current=current)
+
+def addItem():
+	userinfo = awstools.getCurrentUserInfo()
+	print(request.form)
+	comp = request.form['comp']
+	currentVal = request.form['currentVal']
+	requestId = userinfo['currentOrder']
+	awstools.addItem(comp,currentVal,requestId)
+	return "Success!"

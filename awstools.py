@@ -3,6 +3,8 @@ from uuid import uuid4
 from pprint import pprint
 from flask import session
 from datetime import datetime
+import pubchempy as pcp
+from random import randint
 from boto3.dynamodb.conditions import Key, Attr
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -44,9 +46,11 @@ def getPUBName(compoundName):
 	if len(item) != 0:
 		return item[0]['compoundName']
 	else:
-		# compound = pcp.get_compounds(compoundName, 'name')
-		# return compound[0].synonyms[0]
-		return None
+		compound = pcp.get_compounds(compoundName, 'name')
+		try:
+			return compound[0].synonyms[0].lower()
+		except:
+			return None
 
 def checkPassword(username, password):
 	item = userInfoTable.query(
@@ -78,14 +82,8 @@ def createUser(username,password):
 		return False
 	else:
 		hashed = generate_password_hash(password)
-		with open('latestorder.txt','r') as file:
-			x = file.read()
-			id = int(x)
-		print(id)
-		id += 1
+		id = randint(1,100100)
 		createOrder(id,username)
-		with open('latestorder.txt','w') as file:
-			file.write(str(id))
 		item = {'username':username,'password':hashed,'role':'buyer','currentOrder':id}
 		userInfoTable.put_item(Item=item)
 		return True
@@ -119,6 +117,33 @@ def createOrder(id,username):
 
 def kms(id,item):
 	ordersInfoTable.put_item(Item=item)
+
+def getcurrent(order,item):
+	# print(order)
+	# print(item)
+	x = getOrderInfo(order)
+	# print(x)
+	for i in x['items']:
+		if i['compoundName'] == item:
+			return i['quantity']
+	return 0
+
+def addItem(comp,currentVal,requestId):
+	comp = comp.lower()
+	while comp[-1] == ' ':
+		comp = comp[:-1]
+	while comp[0] == ' ':
+		comp = comp[1:]
+	currentVal=int(currentVal)
+	x= getOrderInfo(requestId)
+	done = 0
+	for i in x['items']:
+		if i['compoundName'] == comp:
+			i['quantity']+=currentVal
+			done = 1
+	if not done:
+		x['items'].append({'compoundName':comp,'quantity':currentVal,'status':'-'})
+	ordersInfoTable.put_item(Item=x)
 
 if __name__ == '__main__':
 	pprint(getInventory())

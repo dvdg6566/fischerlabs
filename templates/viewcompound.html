@@ -2,7 +2,34 @@
 {% block title %} {{compoundInfo.compoundName}} {% endblock %} <!-- Title goes here -->
 {% block head %} {{ super() }} {% endblock %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+  {% for message in messages %}
+    <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endwith %}
+
 {% block content %}
+
+	<div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="alert alert-{{category}} alert-dismissible fade show mt-4" role="alert">
+                      {{message}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+  </div>
+
+
 	<br>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/compoundview.css') }}">
 <!-- 	FOR BUYER -->
@@ -10,7 +37,7 @@
 		<table>
 			<tr>
 				<th style="width: 60%;">
-					<a class="header" id="compoundname"> {{compoundInfo.compoundName}} </a>
+					<a class="header" id="compoundnamexxx" id={{compoundInfo.compoundName}}> {{compoundInfo.compoundName}} </a>
 					{%if compoundInfo.imgURL != None %}
 					<a class="header" class="nfpa-rating" class="clearfix"> <img src={{compoundInfo.imgURL}} class="clearfix" width=auto height=auto> </a>
 					{%else%}
@@ -24,7 +51,7 @@
   							<button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" id="decrease"><i class="fa fa-minus" aria-hidden="true"></i>
 							</button>
 						</div>
-						<input class="input-group-field" type="number" name="quantity" value="0">
+						<input class="input-group-field" type="number" name="quantity" value=0>
 						<div class="input-group-button">
 							<button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" id="increase"><i class="fa fa-plus" aria-hidden="true"></i>
 							</button>
@@ -54,8 +81,10 @@
 								e.preventDefault();
 							// Get the field name
 								fieldName = $(this).attr('data-field');
+								console.log(fieldName)
 							// Get its current value
 								var currentVal = parseInt($('input[name='+fieldName+']').val());
+								console.log(currentVal)
 							// If it isn't undefined or its greater than 0
 								if (!isNaN(currentVal) && currentVal > 0) {
 								// Decrement one
@@ -67,19 +96,29 @@
 							});
 						});
 						</script>
+						<script>
+							addtocart = () => {
+								fieldName = 'quantity'
+								console.log(fieldName)
+								var currentVal = parseInt($('input[name='+fieldName+']').val());
+								console.log(currentVal);
+								var comp = document.getElementById('compoundnamexxx').text;
+								console.log(comp);
+								params = {
+									'comp':comp,
+									'currentVal':currentVal
+								}
+								$.post('/addItem',params)
+								alert('Success!')
+							}
+					</script>
 					</div>
 				</th>
 				<th style="width: 10%;">
-					<a class="addtocart" style="overflow: auto;"> <button id="addtocart">Add to Cart</button></a>
+					<a class="addtocart" style="overflow: auto;"> <button id="addtocart" onclick='addtocart()'>Add to Cart</button></a>
 				</th>
 			</tr>
 		</table>
-	<script type="text/javascript">
-		var btn_addtocart = document.getElementById("addtocart");
-		btn_addtocart = function() {
-
-		}
-	</script>
 	</div>
 	<div id="myModal" class="modal">
 	  <!-- Modal content -->
@@ -225,6 +264,12 @@
 				</td>
 			</tr>
 		</table>
+	<a id="orderID"> {{userinfo.currentOrder}} </a>
+	<style>
+		#orderID {
+			visibility: hidden;
+		}
+	</style>
 	</div>
 	
 {% endblock %}
